@@ -3,6 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Research from IMPACT Lab at Arizona State University — featuring EMMA (CVPR 2026) and GenEval (WACV 2026) on multimodal learning and domain generalization.">
+<link rel="canonical" href="https://impactlabasu.github.io/EMMA-x-GenEval/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="IMPACT Lab — Latest Research">
+<meta property="og:description" content="Featuring EMMA (CVPR 2026) and GenEval (WACV 2026) on multimodal learning and domain generalization.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://impactlabasu.github.io/EMMA-x-GenEval/">
+<meta property="og:image" content="https://impactlabasu.github.io/EMMA-x-GenEval/impact-lab-logo.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IMPACT Lab — Latest Research">
+<meta name="twitter:description" content="Featuring EMMA (CVPR 2026) and GenEval (WACV 2026) on multimodal learning and domain generalization.">
+<meta name="twitter:image" content="https://impactlabasu.github.io/EMMA-x-GenEval/impact-lab-logo.png">
+
 <title>IMPACT Lab — Latest Research</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +50,18 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   html {
     font-size: 18px;
@@ -249,6 +277,14 @@
     line-height: 1.65;
   }
 
+  .card-abstract {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-style: italic;
+    opacity: 0.85;
+  }
+
   .card-authors {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.72rem;
@@ -456,7 +492,8 @@
 
   <!-- HEADER -->
   <header class="header">
-    <img src="imapct-lab-logo.png" alt="IMPACT Lab — Arizona State University" class="logo">
+    <img src="impact-lab-logo.png" alt="IMPACT Lab — Arizona State University" class="logo">
+    <h1 class="sr-only">IMPACT Lab — Latest Research</h1>
     <p class="tagline">Our Latest Research</p>
     <div class="ornament">
       <span class="ornament-line"></span>
@@ -469,7 +506,7 @@
   <div class="cards">
 
     <!-- EMMA (first) -->
-    <article class="card card--cvpr">
+    <article class="card card--cvpr" aria-label="EMMA — CVPR 2026 paper">
       <div class="card-band"></div>
       <div class="card-body">
         <div class="badge badge--cvpr">
@@ -478,14 +515,15 @@
         </div>
         <h2 class="card-title">EMMA</h2>
         <p class="card-subtitle">Extracting Multiple Physical Parameters from Multimodal Data</p>
+        <p class="card-abstract">A unified framework for jointly extracting multiple physical parameters from heterogeneous sensor modalities, enabling robust cross-modal reasoning.</p>
         <p class="card-authors">Farhat Shaikh &middot; Ayan Banerjee &middot; Sandeep Gupta</p>
         <div class="card-sep"></div>
         <div class="card-actions">
-          <a href="#" class="btn btn--cvpr-primary" data-placeholder="true">
+          <a href="#" class="btn btn--cvpr-primary" data-placeholder="true" aria-label="EMMA demo — coming soon" aria-disabled="true">
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             Demo
           </a>
-          <a href="https://drive.google.com/file/d/1i4cLcJMLSpkWIlu_tTcwcBqmbfPB34Pe/view?usp=drive_link" class="btn btn--cvpr-secondary" target="_blank">
+          <a href="https://drive.google.com/file/d/1i4cLcJMLSpkWIlu_tTcwcBqmbfPB34Pe/view?usp=drive_link" class="btn btn--cvpr-secondary" target="_blank" rel="noopener noreferrer" aria-label="Read the EMMA paper (PDF)">
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
             Paper
           </a>
@@ -494,7 +532,7 @@
     </article>
 
     <!-- GenEval (second) -->
-    <article class="card card--wacv">
+    <article class="card card--wacv" aria-label="GenEval — WACV 2026 paper">
       <div class="card-band"></div>
       <div class="card-body">
         <div class="badge badge--wacv">
@@ -503,14 +541,15 @@
         </div>
         <h2 class="card-title">GenEval</h2>
         <p class="card-subtitle">Human Knowledge Integrated Multi-modal Learning for Single Source Domain Generalization</p>
+        <p class="card-abstract">Leverages human domain knowledge to guide multi-modal learning, achieving strong generalization from a single source domain to unseen target domains.</p>
         <p class="card-authors">Ayan Banerjee &middot; Kuntal Thakur &middot; Sandeep Gupta</p>
         <div class="card-sep"></div>
         <div class="card-actions">
-          <a href="https://youtu.be/l1tPit0_ay8" class="btn btn--wacv-primary" target="_blank">
+          <a href="https://youtu.be/l1tPit0_ay8" class="btn btn--wacv-primary" target="_blank" rel="noopener noreferrer" aria-label="Watch GenEval demo on YouTube">
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             Demo
           </a>
-          <a href="https://openaccess.thecvf.com/content/WACV2026/html/Banerjee_Human_Knowledge_Integrated_Multi-modal_Learning_for_Single_Source_Domain_Generalization_WACV_2026_paper.html" class="btn btn--wacv-secondary" target="_blank">
+          <a href="https://openaccess.thecvf.com/content/WACV2026/html/Banerjee_Human_Knowledge_Integrated_Multi-modal_Learning_for_Single_Source_Domain_Generalization_WACV_2026_paper.html" class="btn btn--wacv-secondary" target="_blank" rel="noopener noreferrer" aria-label="Read the GenEval paper on WACV 2026 open access">
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
             Paper
           </a>
@@ -523,8 +562,9 @@
   <!-- FOOTER -->
   <footer class="footer">
     <p class="footer-text">
-      <a href="https://github.com/ImpactLabASU" class="footer-link" target="_blank">github.com/ImpactLabASU</a>
+      <a href="https://github.com/ImpactLabASU" class="footer-link" target="_blank" rel="noopener noreferrer" aria-label="Visit IMPACT Lab on GitHub">github.com/ImpactLabASU</a>
     </p>
+    <p class="footer-text" style="margin-top: 8px;">&copy; 2026 IMPACT Lab, Arizona State University</p>
   </footer>
 
 </div>
