@@ -19,7 +19,7 @@ Landing page showcasing recent publications from the [IMPACT Lab](https://github
 
 A unified framework for jointly extracting multiple physical parameters from heterogeneous sensor modalities, enabling robust cross-modal reasoning.
 
-[Paper (PDF)](https://drive.google.com/file/d/1i4cLcJMLSpkWIlu_tTcwcBqmbfPB34Pe/view?usp=drive_link)
+[Paper (PDF)](https://drive.google.com/file/d/1i4cLcJMLSpkWIlu_tTcwcBqmbfPB34Pe/view?usp=drive_link) | [Demo Video](https://youtu.be/Uo79pVlM6Rk)
 
 ---
 
