@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMPACT Lab — Latest Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf9f7;
+    --bg-card: #ffffff;
+    --text-primary: #1a1715;
+    --text-secondary: #5c5550;
+    --text-dim: #9e9790;
+    --border: rgba(0,0,0,0.06);
+    --border-hover: rgba(0,0,0,0.12);
+    --maroon: #8c1d40;
+    --gold: #c7972b;
+    --gold-light: #fdf6e8;
+    --wacv-accent: #1e56a0;
+    --wacv-deep: #143d73;
+    --wacv-light: #e8f0fc;
+    --wacv-glow: rgba(30, 86, 160, 0.12);
+    --cvpr-accent: #6b21a8;
+    --cvpr-deep: #4c1d7a;
+    --cvpr-light: #f1e8fc;
+    --cvpr-glow: rgba(107, 33, 168, 0.12);
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.03);
+    --shadow-hover: 0 20px 60px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.04);
+    --radius: 24px;
+    --radius-btn: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ====== BACKGROUND TEXTURE ====== */
+  .bg-wash {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 25% 0%, rgba(140, 29, 64, 0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 85% 100%, rgba(199, 151, 43, 0.05) 0%, transparent 70%);
+  }
+
+  .bg-lines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+    background-image:
+      linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  /* ====== PAGE ====== */
+  .page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 56px 28px;
+    gap: 60px;
+  }
+
+  /* ====== HEADER ====== */
+  .header {
+    text-align: center;
+    animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .logo {
+    width: clamp(190px, 28vw, 300px);
+    height: auto;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 2px 8px rgba(140, 29, 64, 0.08));
+  }
+
+  .tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-secondary);
+    letter-spacing: 0.01em;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .ornament-line {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+
+  .ornament-line:last-child {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .ornament-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    border-radius: 1px;
+  }
+
+  /* ====== CARDS ====== */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .card {
+    position: relative;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border);
+    transition:
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.5s ease,
+      border-color 0.3s ease;
+    animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    overflow: hidden;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.1s; }
+  .card:nth-child(2) { animation-delay: 0.22s; }
+
+  .card:hover {
+    transform: translateY(-6px) scale(1.005);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .card--cvpr:hover { border-color: rgba(107, 33, 168, 0.15); }
+  .card--wacv:hover { border-color: rgba(30, 86, 160, 0.15); }
+
+  /* Card top band */
+  .card-band {
+    height: 5px;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .card--cvpr .card-band {
+    background: linear-gradient(90deg, var(--cvpr-deep), var(--cvpr-accent), #a855f7);
+  }
+
+  .card--wacv .card-band {
+    background: linear-gradient(90deg, var(--wacv-deep), var(--wacv-accent), #3b82f6);
+  }
+
+  .card-body {
+    padding: 32px 30px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 13px;
+    border-radius: 10px;
+    width: fit-content;
+  }
+
+  .badge--cvpr {
+    background: var(--cvpr-light);
+    color: var(--cvpr-accent);
+  }
+
+  .badge--wacv {
+    background: var(--wacv-light);
+    color: var(--wacv-accent);
+  }
+
+  .badge-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  .badge--cvpr .badge-dot { background: var(--cvpr-accent); }
+  .badge--wacv .badge-dot { background: var(--wacv-accent); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* Card content */
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  .card-subtitle {
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  .card-authors {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.03em;
+    line-height: 1.7;
+  }
+
+  /* Decorative separator inside card */
+  .card-sep {
+    width: 32px;
+    height: 1px;
+    background: var(--border);
+    margin: 2px 0;
+  }
+
+  /* Buttons */
+  .card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 4px;
+  }
+
+  .btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 13px 20px;
+    border-radius: var(--radius-btn);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    transition:
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.3s ease,
+      background 0.25s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-3px);
+  }
+
+  .btn-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+
+  /* Primary buttons — filled */
+  .btn--cvpr-primary {
+    background: linear-gradient(135deg, var(--cvpr-accent) 0%, #8b3abf 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px var(--cvpr-glow);
+  }
+  .btn--cvpr-primary:hover {
+    box-shadow: 0 8px 28px rgba(107, 33, 168, 0.28);
+  }
+
+  .btn--wacv-primary {
+    background: linear-gradient(135deg, var(--wacv-accent) 0%, #2b6cc4 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px var(--wacv-glow);
+  }
+  .btn--wacv-primary:hover {
+    box-shadow: 0 8px 28px rgba(30, 86, 160, 0.28);
+  }
+
+  /* Secondary buttons — outlined */
+  .btn--cvpr-secondary {
+    background: transparent;
+    color: var(--cvpr-accent);
+    border: 1.5px solid rgba(107, 33, 168, 0.2);
+  }
+  .btn--cvpr-secondary:hover {
+    background: var(--cvpr-light);
+    border-color: rgba(107, 33, 168, 0.35);
+    box-shadow: 0 4px 16px rgba(107, 33, 168, 0.1);
+  }
+
+  .btn--wacv-secondary {
+    background: transparent;
+    color: var(--wacv-accent);
+    border: 1.5px solid rgba(30, 86, 160, 0.2);
+  }
+  .btn--wacv-secondary:hover {
+    background: var(--wacv-light);
+    border-color: rgba(30, 86, 160, 0.35);
+    box-shadow: 0 4px 16px rgba(30, 86, 160, 0.1);
+  }
+
+  /* Placeholder tooltip */
+  .btn[data-placeholder="true"]:hover::before {
+    content: 'Coming Soon';
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    animation: tip-in 0.2s ease both;
+  }
+
+  @keyframes tip-in {
+    from { opacity: 0; transform: translateX(-50%) translateY(3px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  /* ====== FOOTER ====== */
+  .footer {
+    text-align: center;
+    animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.34s both;
+  }
+
+  .footer-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--text-dim);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .footer-link {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--maroon);
+  }
+
+  /* ====== ANIMATION ====== */
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 700px) {
+    .page {
+      padding: 40px 16px;
+      gap: 44px;
+      justify-content: flex-start;
+      padding-top: 52px;
+    }
+
+    .logo { width: 170px; }
+
+    .cards {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .card-body {
+      padding: 26px 22px 22px;
+    }
+
+    .card-title { font-size: 1.6rem; }
+
+    .card-actions {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn { padding: 14px 18px; }
+  }
+
+  @media (max-width: 380px) {
+    .logo { width: 150px; }
+    .tagline { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-wash"></div>
+<div class="bg-lines"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <img src="imapct-lab-logo.png" alt="IMPACT Lab — Arizona State University" class="logo">
+    <p class="tagline">Our Latest Research</p>
+    <div class="ornament">
+      <span class="ornament-line"></span>
+      <span class="ornament-diamond"></span>
+      <span class="ornament-line"></span>
+    </div>
+  </header>
+
+  <!-- CARDS -->
+  <div class="cards">
+
+    <!-- EMMA (first) -->
+    <article class="card card--cvpr">
+      <div class="card-band"></div>
+      <div class="card-body">
+        <div class="badge badge--cvpr">
+          <span class="badge-dot"></span>
+          CVPR 2026
+        </div>
+        <h2 class="card-title">EMMA</h2>
+        <p class="card-subtitle">Extracting Multiple Physical Parameters from Multimodal Data</p>
+        <p class="card-authors">Farhat Shaikh &middot; Ayan Banerjee &middot; Sandeep Gupta</p>
+        <div class="card-sep"></div>
+        <div class="card-actions">
+          <a href="#" class="btn btn--cvpr-primary" data-placeholder="true">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Demo
+          </a>
+          <a href="https://drive.google.com/file/d/1i4cLcJMLSpkWIlu_tTcwcBqmbfPB34Pe/view?usp=drive_link" class="btn btn--cvpr-secondary" target="_blank">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Paper
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- GenEval (second) -->
+    <article class="card card--wacv">
+      <div class="card-band"></div>
+      <div class="card-body">
+        <div class="badge badge--wacv">
+          <span class="badge-dot"></span>
+          WACV 2026
+        </div>
+        <h2 class="card-title">GenEval</h2>
+        <p class="card-subtitle">Human Knowledge Integrated Multi-modal Learning for Single Source Domain Generalization</p>
+        <p class="card-authors">Ayan Banerjee &middot; Kuntal Thakur &middot; Sandeep Gupta</p>
+        <div class="card-sep"></div>
+        <div class="card-actions">
+          <a href="#" class="btn btn--wacv-primary" data-placeholder="true" target="_blank">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Demo
+          </a>
+          <a href="https://openaccess.thecvf.com/content/WACV2026/html/Banerjee_Human_Knowledge_Integrated_Multi-modal_Learning_for_Single_Source_Domain_Generalization_WACV_2026_paper.html" class="btn btn--wacv-secondary" target="_blank">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Paper
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-text">
+      <a href="https://github.com/ImpactLabASU" class="footer-link" target="_blank">github.com/ImpactLabASU</a>
+    </p>
+  </footer>
+
+</div>
+
+</body>
+</html>
