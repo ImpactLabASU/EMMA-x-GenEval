@@ -1,4 +1,4 @@
-# IMPACT Lab — Latest Research
+# IMPACT Lab - Latest Research
 
 [![Live Site](https://img.shields.io/badge/Live%20Site-impactlabasu.github.io-blue)](https://impactlabasu.github.io/EMMA-x-GenEval/)
 [![GitHub Pages](https://img.shields.io/badge/Hosted%20on-GitHub%20Pages-222?logo=github)](https://github.com/ImpactLabASU/EMMA-x-GenEval)
@@ -11,7 +11,7 @@ Landing page showcasing recent publications from the [IMPACT Lab](https://github
 
 ## Featured Papers
 
-### EMMA — CVPR 2026
+### EMMA - CVPR 2026
 
 **Extracting Multiple Physical Parameters from Multimodal Data**
 
@@ -23,7 +23,7 @@ A unified framework for jointly extracting multiple physical parameters from het
 
 ---
 
-### GenEval — WACV 2026
+### GenEval - WACV 2026
 
 **Human Knowledge Integrated Multi-modal Learning for Single Source Domain Generalization**
 
@@ -35,7 +35,7 @@ Leverages human domain knowledge to guide multi-modal learning, achieving strong
 
 ## Local Development
 
-This is a static site — no build step required.
+This is a static site - no build step required.
 
 ```bash
 # Clone the repo
